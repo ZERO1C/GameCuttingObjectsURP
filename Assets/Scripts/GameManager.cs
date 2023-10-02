@@ -4,16 +4,16 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    public static GameManager Instance;
-
-    bool _inProgress;
-    GameObject _slice;
-    Material[] _materials;
-    float _pointY;
 
     public Transform Box;
     public Transform Katana;
-    int _renderFilled = Shader.PropertyToID("_MBDefaultBending");
+
+    private bool _inProgress;
+    private GameObject _slice;
+    private Material[] _materials;
+    private float _pointY;
+
+    private int _renderFilled = Shader.PropertyToID("_MBDefaultBending");
     public void Cut(GameObject target)
     {
         var sliceable = target.GetComponent<IBzSliceable>();
@@ -66,11 +66,6 @@ public class GameManager : MonoBehaviour
         }
 
 
-    }
-
-    public GameManager()
-    {
-        Instance = this;
     }
 
     public void MoveBox(float x)

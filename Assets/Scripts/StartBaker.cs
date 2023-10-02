@@ -1,19 +1,25 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Zenject;
 
 public class StartBaker : MonoBehaviour
 {
+    BakerManager _bakerManager;
+    [Inject]
+    public void Init(BakerManager bakerManager)
+    {
+        _bakerManager = bakerManager;
+    }
+
     public void StartBakerVoid()
     {
         Renderer[] renderers  = GetComponentsInChildren<Renderer>();
         GameObject[] gameObjects = new GameObject[renderers.Length];
-
         for (int i = 0; i < renderers.Length; i++)
         {
             gameObjects[i] = renderers[i].gameObject;
         }
-        Debug.Log(546);
-        BakerManager.Baker?.BakeObjects(gameObjects);
+        _bakerManager.BakeObjects(gameObjects);
     }
 }

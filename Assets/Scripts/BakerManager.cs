@@ -1,17 +1,20 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using Zenject;
 public class BakerManager : MonoBehaviour
 {
-
-    public static BakerManager Baker;
     private MB3_MeshBaker _meshBaker;
-    private void Awake()
+    private GameManager _gameManager;
+
+    [Inject]
+    public void Init(GameManager gameManager)
     {
-        Baker = this;
+        _gameManager = gameManager;
         _meshBaker = GetComponent<MB3_MeshBaker>();
+
     }
+
     public void BakeObjects(GameObject[] gos)
     {
         if (gos.Length > 0)
@@ -23,10 +26,11 @@ public class BakerManager : MonoBehaviour
         }
 
     }
+
     IEnumerator NewSlice()
     {
         yield return null;
-        GameManager.Instance.BakeSlice(GetComponentInChildren<Renderer>().gameObject);
+        _gameManager.BakeSlice(GetComponentInChildren<Renderer>().gameObject);
     }
 
 }
