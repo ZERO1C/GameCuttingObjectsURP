@@ -8,25 +8,34 @@ namespace Scripts.Knife
 {
     public class Knife : MonoBehaviour
     {
-        private GameManager _gameManager;
-        [HideInInspector] public KnifeTargetable KatanaTargetable;
-        [HideInInspector] public KnifeMovement KatanaMovement;
+        private Controller _controller;
+        private BakerManager _bakerManager;
+        [HideInInspector] public KnifeTargetable KnifeTargetable;
+        [HideInInspector] public KnifeMovement KnifeMovement;
+        [HideInInspector] public KnifeCut KnifeCut;
 
         [Inject]
-        public void Init(GameManager gameManager)
+        public void Init(Controller controller, BakerManager bakerManager)
         {
-            _gameManager = gameManager;
-            BindKatanaTargetable();
-            BindKatanaMovement();
-            KatanaTargetable.Init(_gameManager);
+            _controller = controller;
+            _bakerManager = bakerManager;
+            BindKnifeTargetable();
+            BindKnifeMovement();
+            BindKnifeCut();
+            KnifeTargetable.Init(KnifeCut);
+            KnifeCut.Init(_bakerManager);
         }
-        private void BindKatanaTargetable()
+        private void BindKnifeTargetable()
         {
-            if (!KatanaTargetable) KatanaTargetable = GetComponent<KnifeTargetable>();
+            if (!KnifeTargetable) KnifeTargetable = GetComponent<KnifeTargetable>();
         }     
-        private void BindKatanaMovement()
+        private void BindKnifeMovement()
         {
-            if (!KatanaMovement) KatanaMovement = GetComponent<KnifeMovement>();
+            if (!KnifeMovement) KnifeMovement = GetComponent<KnifeMovement>();
+        }
+        private void BindKnifeCut()
+        {
+            if (!KnifeCut) KnifeCut = GetComponent<KnifeCut>();
         }
     }
 }

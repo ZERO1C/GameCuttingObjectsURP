@@ -7,15 +7,15 @@ namespace Scripts.Knife
 {
     public class KnifeTargetable : MonoBehaviour
     {
-        private GameManager _gameManager;
+        private KnifeCut _knifeCut;
 
-        public void Init(GameManager gameManager)
+        public void Init(KnifeCut knifeCut)
         {
-            _gameManager = gameManager;
+            _knifeCut = knifeCut;
         }
         private void OnTriggerEnter(Collider other)
         {
-            _gameManager.Cut(other.gameObject);
+            _knifeCut.Cut(other.gameObject);
         }
     }
 }

@@ -982,8 +982,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1777015913}
-        m_TargetAssemblyTypeName: UnityEngine.Object, UnityEngine
-        m_MethodName: MoveKatana
+        m_TargetAssemblyTypeName: Controller, Assembly-CSharp
+        m_MethodName: MoveKnife
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1513,7 +1513,7 @@ GameObject:
   - component: {fileID: 1777015914}
   - component: {fileID: 1777015913}
   m_Layer: 0
-  m_Name: GameManager
+  m_Name: Controller
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1654,8 +1654,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 352c5e5d7a6c126468adb12fb16dd95c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GameManager: {fileID: 1777015913}
+  Controller: {fileID: 1777015913}
   BakerManager: {fileID: 1330944322}
+  Knife: {fileID: 2060684112}
 --- !u!114 &1983478439
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1859,6 +1860,7 @@ GameObject:
   - component: {fileID: 2060684112}
   - component: {fileID: 2060684118}
   - component: {fileID: 2060684117}
+  - component: {fileID: 2060684119}
   m_Layer: 0
   m_Name: Knife
   m_TagString: Untagged
@@ -1893,8 +1895,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd990c7dd4834fe428715de33976b037, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  KatanaTargetable: {fileID: 0}
-  KatanaMovement: {fileID: 0}
+  KnifeTargetable: {fileID: 0}
+  KnifeMovement: {fileID: 0}
+  KnifeCut: {fileID: 0}
 --- !u!54 &2060684113
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1996,6 +1999,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b29d302fa5aa4d6478d8b36fbafa6935, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &2060684119
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2060684109}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7a6e4e47555e5dd4ba388208b7d4343d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &2083353739

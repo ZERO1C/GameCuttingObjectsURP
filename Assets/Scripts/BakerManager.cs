@@ -5,12 +5,12 @@ using Zenject;
 public class BakerManager : MonoBehaviour
 {
     private MB3_MeshBaker _meshBaker;
-    private GameManager _gameManager;
+    private Controller _controller;
 
     [Inject]
-    public void Init(GameManager gameManager)
+    public void Init(Controller controller)
     {
-        _gameManager = gameManager;
+        _controller = controller;
         _meshBaker = GetComponent<MB3_MeshBaker>();
 
     }
@@ -30,7 +30,7 @@ public class BakerManager : MonoBehaviour
     IEnumerator NewSlice()
     {
         yield return null;
-        _gameManager.BakeSlice(GetComponentInChildren<Renderer>().gameObject);
+        _controller.BindNewSlice(GetComponentInChildren<Renderer>().gameObject);
     }
 
 }
