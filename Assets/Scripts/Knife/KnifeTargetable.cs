@@ -15,6 +15,7 @@ namespace Scripts.Knife
         }
         private void OnTriggerEnter(Collider other)
         {
+            Debug.Log("OnTriggerEnter");
             _knifeCut.Cut(other.gameObject);
         }
     }

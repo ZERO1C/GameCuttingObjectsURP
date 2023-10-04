@@ -5,8 +5,6 @@ using Scripts.Knife;
 
 public class Controller : MonoBehaviour
 {
-
-    public Transform Box;
     public Transform Katana;
 
     private bool _inProgress;
@@ -63,13 +61,6 @@ public class Controller : MonoBehaviour
         pos.y = -0.2f;
         _slice.transform.position = pos;
         _inProgress = true;
-    }
-
-    public void MoveBox(float x)
-    {
-        var pos = Box.position;
-        pos.x = x;
-        Box.position = pos;
     }
 
     public void MoveKnife(Vector3 pos)
