@@ -9,11 +9,13 @@ public class GameplaySceneInstaller : MonoInstaller
     public Controller Controller;
     public BakerManager BakerManager;
     public Knife Knife;
+    public ObjectForCuttingMovement ObjectForCuttingMovement;
 
     public override void InstallBindings()
     {
         Container.Bind<Controller>().FromInstance(Controller).AsSingle().NonLazy();
         Container.Bind<BakerManager>().FromInstance(BakerManager).AsSingle().NonLazy();
         Container.Bind<Knife>().FromInstance(Knife).AsSingle().NonLazy();
+        Container.Bind<ObjectForCuttingMovement>().FromInstance(ObjectForCuttingMovement).AsSingle().NonLazy();
     }
 }

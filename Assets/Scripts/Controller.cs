@@ -18,14 +18,32 @@ public class Controller : MonoBehaviour
 
     private Knife _knife;
     private BakerManager _bakerManager;
+    private ObjectForCuttingMovement _objectForCuttingMovement;
 
     [Inject]
-    public void Init(Knife knife, BakerManager bakerManager)
+    public void Init(Knife knife, BakerManager bakerManager, ObjectForCuttingMovement objectForCuttingMovement)
     {
         _knife = knife;
         _bakerManager = bakerManager;
+        _objectForCuttingMovement = objectForCuttingMovement;
     }
     
+    public void MoveControl(bool movementState)
+    {
+        if (movementState)
+        {
+            _knife.MovementSetState(MovementStateKnife.Down);
+            _objectForCuttingMovement.SetState(ObjectForCuttingMovement.MovementStateObject.Stand);
+        }
+        else
+        {
+            _knife.MovementSetState(MovementStateKnife.Up);
+
+        }
+
+    }
+
+
     public void BindNewSlice( GameObject slice)
     {
         _slice = slice;
@@ -34,13 +52,17 @@ public class Controller : MonoBehaviour
         if (!rb)
         {
             rb = _slice.AddComponent<Rigidbody>();
-            _slice.AddComponent<MeshCollider>().convex = true;
+            //_slice.AddComponent<MeshCollider>().convex = true;
             rb.useGravity = true;
             rb.collisionDetectionMode = CollisionDetectionMode.ContinuousDynamic;
         }
 
         rb.isKinematic = true;
         _slice.transform.localRotation = Quaternion.identity;
+        var pos = _slice.transform.position;
+        pos.y = -0.2f;
+        _slice.transform.position = pos;
+        _inProgress = true;
     }
 
     public void MoveBox(float x)
@@ -50,31 +72,29 @@ public class Controller : MonoBehaviour
         Box.position = pos;
     }
 
-    public void MoveKnife(float y)
+    public void MoveKnife(Vector3 pos)
     {
-        Debug.Log(y);
-        var pos = _knife.KnifeMovement.MoveKnife(y);
-
-        if (!_slice)
+        if (!_inProgress)
         {
             return;
         }
 
-        float pointY = _slice.transform.InverseTransformPoint(pos).y;
+        float pointY = pos.y;
+        if (_pointY == 0) _pointY = pointY;
         if (_pointY > pointY)
         {
             _pointY = pointY;
         }
-
+        Debug.Log(_pointY);
         foreach (var material in _materials)
         {
-            material.SetFloat(_renderFilled, 1/ Mathf.Clamp(y,0.1f,10)*5);
+            material.SetFloat(_renderFilled, 1/ Mathf.Clamp(_pointY, 0.1f,10)*3);
         }
 
-        if (y <= 0)
+        if (_pointY <= 0.1f)
         {
             _slice.GetComponent<Rigidbody>().isKinematic = false;
-            //Destroy(_slice.transform.parent.gameObject);
+            _pointY = 0;
             _inProgress = false;
         }
     }
