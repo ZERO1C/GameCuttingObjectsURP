@@ -69,17 +69,9 @@ namespace Scripts.Knife
             if (!_sliceCutOff && pos.y <= 0.1f) _sliceCutOff = true;
             else if (_sliceCutOff && pos.y == _startPosition.y)
             {
-                _objectForCuttingMovement.SetState(ObjectForCuttingMovement.MovementStateObject.Forward);
+                _objectForCuttingMovement.SetState(MovementStateObject.Forward);
                 _sliceCutOff = false;
             }
         }
     }
-    public enum MovementStateKnife
-    {
-        Up,
-        Down,
-        Stand
-    }
-    
-    
 }

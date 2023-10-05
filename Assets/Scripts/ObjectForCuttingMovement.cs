@@ -62,10 +62,4 @@ public class ObjectForCuttingMovement: MonoBehaviour
         _rb.isKinematic = false;
         Destroy(gameObject, 3f);
     }
-    public enum MovementStateObject
-    {
-        Forward,
-        Stand
-
-    }
 }

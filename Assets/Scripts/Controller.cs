@@ -36,7 +36,7 @@ public class Controller : MonoBehaviour
         if (movementState)
         {
             _knife.MovementSetState(MovementStateKnife.Down);
-            _objectForCuttingMovement.SetState(ObjectForCuttingMovement.MovementStateObject.Stand);
+            _objectForCuttingMovement.SetState(MovementStateObject.Stand);
         }
         else
         {
