@@ -27,7 +27,7 @@ public class BakerManager : MonoBehaviour
 
     }
 
-    IEnumerator NewSlice()
+    private IEnumerator NewSlice()
     {
         yield return null;
         _controller.BindNewSlice(GetComponentInChildren<Renderer>().gameObject);

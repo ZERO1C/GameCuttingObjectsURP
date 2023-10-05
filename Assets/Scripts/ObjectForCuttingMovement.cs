@@ -6,9 +6,11 @@ using Zenject;
 
 public class ObjectForCuttingMovement: MonoBehaviour
 {
-    public float SpeedMove=1;
+    // to do ініціалізація з фабрикі коли появиться фабрика
+    public float SpeedMove=1f;
     private MovementStateObject _state;
     private Rigidbody _rb;
+
     [Inject]
     public void Init()
     {
@@ -28,7 +30,7 @@ public class ObjectForCuttingMovement: MonoBehaviour
         }
         _state = state;
     }
-    IEnumerator MoveObject()
+    private IEnumerator MoveObject()
     {
         
         while (true)
@@ -36,7 +38,7 @@ public class ObjectForCuttingMovement: MonoBehaviour
             switch (_state)
             {
                 case MovementStateObject.Forward:
-                    MoveObject(Vector3.right* SpeedMove/10);
+                    MoveObject(Vector3.right* SpeedMove/10f);
                     break;
                 case MovementStateObject.Stand:
                     break;
@@ -50,7 +52,7 @@ public class ObjectForCuttingMovement: MonoBehaviour
     public void MoveObject(Vector3 vector)
     {
         var pos = transform.position;
-        pos += vector * SpeedMove / 100;
+        pos += vector * SpeedMove / 100f;
         transform.position = pos;
     }
     
@@ -58,7 +60,7 @@ public class ObjectForCuttingMovement: MonoBehaviour
     {
         SetState(MovementStateObject.Stand);
         _rb.isKinematic = false;
-        Destroy(gameObject, 3);
+        Destroy(gameObject, 3f);
     }
     public enum MovementStateObject
     {

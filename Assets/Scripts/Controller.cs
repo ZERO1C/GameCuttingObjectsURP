@@ -5,7 +5,9 @@ using Scripts.Knife;
 
 public class Controller : MonoBehaviour
 {
+    // to do рефактор на три різних класа
     public Transform Katana;
+    public AnimationCurve Refinecurve;
 
     private bool _inProgress;
     private GameObject _slice;
@@ -17,6 +19,7 @@ public class Controller : MonoBehaviour
     private Knife _knife;
     private BakerManager _bakerManager;
     private ObjectForCuttingMovement _objectForCuttingMovement;
+    private Vector3 _oldPositionCuttingOb;
 
     [Inject]
     public void Init(Knife knife, BakerManager bakerManager, ObjectForCuttingMovement objectForCuttingMovement)
@@ -24,8 +27,10 @@ public class Controller : MonoBehaviour
         _knife = knife;
         _bakerManager = bakerManager;
         _objectForCuttingMovement = objectForCuttingMovement;
+        if (Refinecurve.length == 0) Refinecurve = new AnimationCurve(new Keyframe(0, 1), new Keyframe(1, 1));
+        _oldPositionCuttingOb = objectForCuttingMovement.transform.position;
     }
-    
+
     public void MoveControl(bool movementState)
     {
         if (movementState)
@@ -50,7 +55,6 @@ public class Controller : MonoBehaviour
         if (!rb)
         {
             rb = _slice.AddComponent<Rigidbody>();
-            //_slice.AddComponent<MeshCollider>().convex = true;
             rb.useGravity = true;
             rb.collisionDetectionMode = CollisionDetectionMode.ContinuousDynamic;
         }
@@ -63,7 +67,7 @@ public class Controller : MonoBehaviour
         _inProgress = true;
     }
 
-    public void MoveKnife(Vector3 pos)
+    public void MoveSlice(Vector3 pos)
     {
         if (!_inProgress)
         {
@@ -71,22 +75,29 @@ public class Controller : MonoBehaviour
         }
 
         float pointY = pos.y;
-        if (_pointY == 0) _pointY = pointY;
+        if (_pointY == 0f) _pointY = pointY;
         if (_pointY > pointY)
         {
             _pointY = pointY;
+            
         }
-        Debug.Log(_pointY);
+        
+        float y = Refinecurve.Evaluate(_pointY);
+        Vector3 _newPositionCuttingOb = _objectForCuttingMovement.transform.position;
+        float sliceThickness = _newPositionCuttingOb.x -_oldPositionCuttingOb.x;   
+        sliceThickness = 1f / (sliceThickness*5 + 1f);
+
         foreach (var material in _materials)
         {
-            material.SetFloat(_renderFilled, 1/ Mathf.Clamp(_pointY, 0.1f,10)*3);
+            material.SetFloat(_renderFilled, Mathf.Clamp(y, 0f,10f)*35f* sliceThickness);
         }
 
         if (_pointY <= 0.1f)
         {
             _slice.GetComponent<Rigidbody>().isKinematic = false;
-            _pointY = 0;
+            _pointY = 0f;
             _inProgress = false;
+            _oldPositionCuttingOb = _newPositionCuttingOb;
         }
     }
 }

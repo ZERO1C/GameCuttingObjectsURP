@@ -1279,6 +1279,39 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Katana: {fileID: 1713151042}
+  Refinecurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 3
+      inSlope: -5.0179987
+      outSlope: -5.0179987
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.4630344
+      value: 0.67649406
+      inSlope: -1.9817156
+      outSlope: -1.9817156
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.73723626
+      outWeight: 0.11434029
+    - serializedVersion: 3
+      time: 1.5
+      value: 0.007080078
+      inSlope: -0.1331709
+      outSlope: -0.1331709
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.27881882
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!4 &1294891981
 Transform:
   m_ObjectHideFlags: 0
@@ -1341,7 +1374,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1713151040}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: -0.3, z: 0}
   m_LocalScale: {x: 0.01, y: 0.9, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1373,7 +1406,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac358e82cce29844d8920f2c1df8d0c9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SpeedMove: 3
+  SpeedMove: 4
 --- !u!114 &1713151045
 MonoBehaviour:
   m_ObjectHideFlags: 0

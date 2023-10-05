@@ -8,7 +8,7 @@ namespace Scripts.UI
 {
     public class UIController : MonoBehaviour
     {
-        Controller _controller;
+        private Controller _controller;
 
         [Inject]
         public void Init(Controller controller)

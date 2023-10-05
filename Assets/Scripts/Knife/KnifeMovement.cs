@@ -7,7 +7,7 @@ namespace Scripts.Knife
 {
     public class KnifeMovement : MonoBehaviour
     {
-        public float SpeedMove = 1;
+        public float SpeedMove = 1f;
 
         private Controller _controller;
         private ObjectForCuttingMovement _objectForCuttingMovement;
@@ -38,7 +38,7 @@ namespace Scripts.Knife
             }
             _state = state;
         }
-        IEnumerator MoveKnife()
+        private IEnumerator MoveKnife()
         {
             while (true)
             {
@@ -62,11 +62,11 @@ namespace Scripts.Knife
         public void MoveKnife(Vector3 vector)
         {
             var pos = transform.position;
-            pos += vector * SpeedMove / 100;
-            pos.y = Mathf.Clamp(pos.y, 0, _startPosition.y);
+            pos += vector * SpeedMove / 100f;
+            pos.y = Mathf.Clamp(pos.y, 0f, _startPosition.y);
             transform.position = pos;
-            _controller.MoveKnife(pos);
-            if (!_sliceCutOff && pos.y == 0) _sliceCutOff = true;
+            _controller.MoveSlice(pos);
+            if (!_sliceCutOff && pos.y <= 0.1f) _sliceCutOff = true;
             else if (_sliceCutOff && pos.y == _startPosition.y)
             {
                 _objectForCuttingMovement.SetState(ObjectForCuttingMovement.MovementStateObject.Forward);

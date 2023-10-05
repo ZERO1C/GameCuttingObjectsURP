@@ -5,9 +5,9 @@ using Zenject;
 
 public class StartBaker : MonoBehaviour
 {
-    BakerManager _bakerManager;
-    Renderer[] renderers;
-    GameObject[] gameObjects;
+    private BakerManager _bakerManager;
+    private Renderer[] _renderers;
+    private GameObject[] _gameObjects;
 
     public void Init(BakerManager bakerManager)
     {
@@ -16,12 +16,12 @@ public class StartBaker : MonoBehaviour
 
     public void StartBakerVoid()
     {
-        renderers  = GetComponentsInChildren<Renderer>();
-        gameObjects = new GameObject[renderers.Length];
-        for (int i = 0; i < renderers.Length; i++)
+        _renderers  = GetComponentsInChildren<Renderer>();
+        _gameObjects = new GameObject[_renderers.Length];
+        for (int i = 0; i < _renderers.Length; i++)
         {
-            gameObjects[i] = renderers[i].gameObject;
+            _gameObjects[i] = _renderers[i].gameObject;
         }
-        _bakerManager.BakeObjects(gameObjects);
+        _bakerManager.BakeObjects(_gameObjects);
     }
 }
