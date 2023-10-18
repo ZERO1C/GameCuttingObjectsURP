@@ -18,11 +18,9 @@ namespace Scripts.Knife
         public void Cut(GameObject target)
         {
             var sliceable = target.GetComponent<IBzSliceable>();
-            Debug.Log("StartCut");
 
             if (sliceable == null)
             {
-                Debug.Log("null");
 
                 return;
             }
@@ -32,7 +30,6 @@ namespace Scripts.Knife
             {
                 if (!r.sliced)
                 {
-                    Debug.Log("null");
                     return;
                 }
 
@@ -43,7 +40,6 @@ namespace Scripts.Knife
 
                 StartBaker startBaker = _slice.GetComponent<StartBaker>();
                 startBaker.Init(_bakerManager);
-                Debug.Log("StartBakerVoid");
                 startBaker.StartBakerVoid();
             });
         }
